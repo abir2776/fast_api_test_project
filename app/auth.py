@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status, Form
 from datetime import timedelta, datetime
 from jose import jwt
 import os
+from .schemas import TokenRequest
 
 router = APIRouter()
 SECRET_KEY = "supersecret"
@@ -13,7 +14,9 @@ CLIENT_SECRET = os.getenv("CLIENT_SECRET")
 
 
 @router.post("/token")
-def login(client_id: str = Form(...), client_secret: str = Form(...)):
+def login(token_request: TokenRequest):
+    client_id = token_request.client_id
+    client_secret = token_request.client_secret
     if client_id != CLIENT_ID or client_secret != CLIENT_SECRET:
         raise HTTPException(status_code=401, detail="Invalid credentials")
 
