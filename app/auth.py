@@ -1,7 +1,9 @@
-from fastapi import APIRouter, Depends, HTTPException, status, Form
-from datetime import timedelta, datetime
-from jose import jwt
 import os
+from datetime import datetime, timedelta
+
+from fastapi import APIRouter, HTTPException
+from jose import jwt
+
 from .schemas import TokenRequest
 
 router = APIRouter()

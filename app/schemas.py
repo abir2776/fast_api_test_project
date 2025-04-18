@@ -1,5 +1,6 @@
-from pydantic import BaseModel
 from datetime import datetime
+
+from pydantic import BaseModel
 
 
 class PostCreate(BaseModel):
@@ -14,3 +15,8 @@ class PostOut(PostCreate):
 
     class Config:
         orm_mode = True
+
+
+class TokenRequest(BaseModel):
+    client_id: str
+    client_secret: str
